@@ -20,14 +20,14 @@ public class CalculadoraCarnita {
     }
     
     public int Evaluapostfijo(String operador)throws Unchecked{
-        Stack <Integer> calcu=new Stack<Integer>();
+         Stack <Integer> calcu=new Stack<Integer>();
         int res=0,num1,num2,auxadd;
         char aux;
         
         for(int i=0; i<operador.length();i++){
             aux=operador.charAt(i);
-            if(aux!='/' || aux!='*' || aux!='-' || aux!='+'){
-                auxadd=Integer.parseInt(""+aux);
+            if(aux!='/' && aux!='*' && aux!='-' && aux!='+'){
+                auxadd=Integer.parseInt(aux+"");
                 calcu.add(auxadd);
             }
             else{
@@ -57,4 +57,12 @@ public class CalculadoraCarnita {
                 
         return calcu.peek();
     }
+    
+    public static void main(String[] args) {
+        String operador="12*6+5-";
+        CalculadoraCarnita calcu=new CalculadoraCarnita();
+        
+        System.out.print(calcu.Evaluapostfijo(operador));
+    }
+    
 }
