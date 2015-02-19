@@ -6,6 +6,7 @@
 package calcu;
 
 import java.util.Stack;
+import stackadt.Unchecked;
 
 /**
  *
@@ -18,11 +19,42 @@ public class CalculadoraCarnita {
         this.pila=new Stack <Double>();
     }
     
-    public double Evaluapostfijo(String num){
-        double res=0;
-        char 
+    public int Evaluapostfijo(String operador)throws Unchecked{
+        Stack <Integer> calcu=new Stack<Integer>();
+        int res=0,num1,num2,auxadd;
+        char aux;
         
-        
-        return res;
+        for(int i=0; i<operador.length();i++){
+            aux=operador.charAt(i);
+            if(aux!='/' || aux!='*' || aux!='-' || aux!='+'){
+                auxadd=Integer.parseInt(""+aux);
+                calcu.add(auxadd);
+            }
+            else{
+                num2=calcu.peek();
+                calcu.pop();
+                num1=calcu.peek();
+                calcu.pop();
+                switch (aux){
+                    case '/':
+                        res=num1/num2;
+                        break;
+                    case '*':
+                        res=num1*num2;
+                        break;
+                    case '-':
+                        res=num1-num2;
+                        break;
+                    case '+':
+                        res=num1+num2;
+                }
+                 calcu.add(res);
+            }
+        }
+        if(calcu.size()!=1){
+            throw new Unchecked ("La operacion no tiene el formato correcto.");
+        }
+                
+        return calcu.peek();
     }
 }
