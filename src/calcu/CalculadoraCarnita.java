@@ -5,6 +5,7 @@
  */
 package calcu;
 
+import java.util.Scanner;
 import java.util.Stack;
 import stackadt.Unchecked;
 
@@ -21,14 +22,16 @@ public class CalculadoraCarnita {
     
     public int Evaluapostfijo(String operador)throws Unchecked{
          Stack <Integer> calcu=new Stack<Integer>();
-        int res=0,num1,num2,auxadd;
+        int res=0,num1,num2;
         char aux;
+        String auxS;
+        Scanner sc=new Scanner(operador);
         
-        for(int i=0; i<operador.length();i++){
-            aux=operador.charAt(i);
+        while(sc.hasNext()){
+            auxS=sc.next();
+            aux=auxS.charAt(0);
             if(aux!='/' && aux!='*' && aux!='-' && aux!='+'){
-                auxadd=Integer.parseInt(aux+"");
-                calcu.add(auxadd);
+                calcu.add(Integer.parseInt(auxS));
             }
             else{
                 num2=calcu.peek();
@@ -37,7 +40,12 @@ public class CalculadoraCarnita {
                 calcu.pop();
                 switch (aux){
                     case '/':
-                        res=num1/num2;
+                        if(num2==0){
+                            throw new Unchecked("No puedes dividir entre 0");
+                        }
+                        else{
+                            res=num1/num2;
+                        }
                         break;
                     case '*':
                         res=num1*num2;
@@ -59,10 +67,10 @@ public class CalculadoraCarnita {
     }
     
     public static void main(String[] args) {
-        String operador="12*6+5-";
+        String operador="1 8 / 8";
         CalculadoraCarnita calcu=new CalculadoraCarnita();
         
-        System.out.print(calcu.Evaluapostfijo(operador));
+        System.out.print("="+calcu.Evaluapostfijo(operador));
     }
     
 }
