@@ -20,9 +20,9 @@ public class CalculadoraCarnita {
         this.pila=new Stack <Double>();
     }
     
-    public int Evaluapostfijo(String operador)throws Unchecked{
-         Stack <Integer> calcu=new Stack<Integer>();
-        int res=0,num1,num2;
+    public double Evaluapostfijo(String operador)throws Unchecked{
+         Stack <Double> calcu=new Stack<Double>();
+        double res=0,num1,num2;
         char aux;
         String auxS;
         Scanner sc=new Scanner(operador);
@@ -31,7 +31,7 @@ public class CalculadoraCarnita {
             auxS=sc.next();
             aux=auxS.charAt(0);
             if(aux!='/' && aux!='*' && aux!='-' && aux!='+'){
-                calcu.add(Integer.parseInt(auxS));
+                calcu.add(Double.parseDouble(auxS));
             }
             else{
                 num2=calcu.peek();
@@ -67,7 +67,7 @@ public class CalculadoraCarnita {
     }
     
     public static void main(String[] args) {
-        String operador="1 8 / 8";
+        String operador="1.2 8 / ";
         CalculadoraCarnita calcu=new CalculadoraCarnita();
         
         System.out.print("="+calcu.Evaluapostfijo(operador));
