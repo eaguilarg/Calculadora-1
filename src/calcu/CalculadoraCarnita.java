@@ -23,46 +23,49 @@ public class CalculadoraCarnita {
         this.pila = new Stack<Double>();
     }
 
-    public double Evaluapostfijo(String operador) throws Unchecked {
-        miPila calcu = new miPila();
-        double res = 0, num1, num2;
-        char aux;
-        String auxS;
-        Scanner sc = new Scanner(operador);
+    public double Evaluapostfijo(String operacion) throws Unchecked {
+        miPila calculadorita = new miPila();
+        double resultado = 0, numero1 = 0, numero2 = 0;
+        char operador;
+        String lector;
+        Scanner sc = new Scanner(operacion);
 
         while (sc.hasNext()) {
-            auxS = sc.next();
-            aux = auxS.charAt(0);
-            if (aux != '/' && aux != '*' && aux != '-' && aux != '+') {
-                calcu.push(Double.parseDouble(auxS));
+            lector = sc.next();
+            operador = lector.charAt(0);
+            if (operador != '/' && operador != '*' && operador != '-' && operador != '+') {
+                calculadorita.push(Double.parseDouble(lector));
             } else {
-                num2 = (Double) calcu.pop();
-                num1 = (Double) calcu.pop();
-                switch (aux) {
+                if (calculadorita.isEmpty()) {
+                    throw new Unchecked("Syntax ERROR");
+                }
+                numero2 = (Double) calculadorita.pop();
+                numero1 = (Double) calculadorita.pop();
+                switch (operador) {
                     case '/':
-                        if (num2 == 0) {
+                        if (numero2 == 0) {
                             throw new Unchecked("Math ERROR");
                         } else {
-                            res = num1 / num2;
+                            resultado = numero1 / numero2;
                         }
                         break;
                     case '*':
-                        res = num1 * num2;
+                        resultado = numero1 * numero2;
                         break;
                     case '-':
-                        res = num1 - num2;
+                        resultado = numero1 - numero2;
                         break;
                     case '+':
-                        res = num1 + num2;
+                        resultado = numero1 + numero2;
                 }
-                calcu.push(res);
+                calculadorita.push(resultado);
             }
         }
-        if (calcu.size() != 1) {
+        if (calculadorita.size() != 1) {
             throw new Unchecked("Syntax ERROR");
         }
 
-        return (Double) calcu.peek();
+        return (Double) calculadorita.peek();
     }
 
     public static void main(String[] args) {
