@@ -29,6 +29,8 @@
  */
 package calcu;
 
+import stackadt.Unchecked;
+
 public class CalculadoraGUI extends javax.swing.JFrame {
     private StringBuilder numCalcu = new StringBuilder();
     private CalculadoraCarnita calcu = new CalculadoraCarnita();
@@ -399,9 +401,13 @@ public class CalculadoraGUI extends javax.swing.JFrame {
         double resultado;
         
         postfijo=calcu.infijoAPostfijo(numCalcu.toString());
-        System.out.print(postfijo);
-        resultado=calcu.evaluaPostFijo(postfijo);
-        jTextField7.setText(""+resultado);
+        try{
+            resultado=calcu.evaluaPostFijo(postfijo);
+            jTextField7.setText(""+resultado);
+        }
+        catch(Unchecked math){
+            jTextField7.setText("ERROR");
+        }
         numCalcu = new StringBuilder();
     }//GEN-LAST:event_BotonIgualActionPerformed
 
