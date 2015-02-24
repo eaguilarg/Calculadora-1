@@ -69,9 +69,9 @@ public class CalculadoraCarnita {
     }
 
     public static void main(String[] args) {
-        String operador = "1.2 8 / 15 * 9 -";
+        String operador = "8 4 / 3 + 5 2 2 * - *";
         CalculadoraCarnita calcu = new CalculadoraCarnita();
 
-        System.out.print("=" + calcu.Evaluapostfijo(operador));
+        System.out.print("\n" + calcu.Evaluapostfijo(operador) + "\n" + "\n");
     }
 }
