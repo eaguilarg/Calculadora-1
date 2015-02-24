@@ -17,13 +17,13 @@ import stackadt.miPila;
  */
 public class CalculadoraCarnita {
 
-    public Stack<Double> pila;
+    public miPila calculadorita;
 
     public CalculadoraCarnita() {
-        this.pila = new Stack<Double>();
+        this.calculadorita = new miPila();
     }
 
-    public double Evaluapostfijo(String operacion) throws Unchecked {
+    public double evaluaPostFijo(String operacion) throws Unchecked {
         miPila calculadorita = new miPila();
         double resultado = 0, numero1 = 0, numero2 = 0;
         char operador;
@@ -33,7 +33,7 @@ public class CalculadoraCarnita {
         while (sc.hasNext()) {
             lector = sc.next();
             operador = lector.charAt(0);
-            if (operador != '/' && operador != '*' && operador != '-' && operador != '+') {
+            if (operador != '/' && operador != '*' && operador != '-' && operador != '+' || lector.length()>=2) {
                 calculadorita.push(Double.parseDouble(lector));
             } else {
                 if (calculadorita.isEmpty()) {
@@ -68,10 +68,73 @@ public class CalculadoraCarnita {
         return (Double) calculadorita.peek();
     }
 
-    public static void main(String[] args) {
-        String operador = "8 4 / 3 + 5 2 2 * - *";
-        CalculadoraCarnita calcu = new CalculadoraCarnita();
+    public String infijoAPostfijo(String expr) {
+        StringBuilder postfix = new StringBuilder();
+        String token;
+        Scanner sc;
+        miPila pila = new miPila();
 
-        System.out.print("\n" + calcu.Evaluapostfijo(operador) + "\n" + "\n");
+        if (pila.evaluaParentesis(expr)) {
+
+            sc = new Scanner(expr);
+
+            try {
+                while (sc.hasNext()) {
+                    token = sc.next();
+                    if (isOperator(token)) {
+                        while (!pila.isEmpty()
+                                && !pila.peek().equals("(")
+                                && opGreaterEqual((String) pila.peek(), token)) {
+                            postfix.append(" " + pila.pop());
+                        }
+                        pila.push(token);
+                    } else if (token.equals("(")) {
+                        pila.push(token);
+                    } else if (token.equals(")")) {
+                        while (!(pila.peek().equals("("))) {
+                            postfix.append(" " + pila.pop());
+                        }
+                        pila.pop(); // paréntesis que abre correspondiente
+                    } else // token is operand
+                    {
+                        postfix.append(" " + token);
+                    }
+                }
+
+                while (!pila.isEmpty()) {
+                    postfix.append(" " + pila.pop());
+                }
+            } catch (Unchecked ese) {
+                postfix = new StringBuilder("Invalid Expression");
+                System.err.println(ese);
+            }
+
+        } else {
+            postfix = new StringBuilder("Invalid Expression");
+            System.err.println("Paréntesis no balanceados");
+        }
+
+        return postfix.toString();
+    }
+
+    static boolean isOperator(String token) {
+        return (token.equals("+") || token.equals("-")
+                || token.equals("*") || token.equals("/"));
+    }
+
+    private static boolean opGreaterEqual(String tope, String actual) {
+        boolean result = false;
+        if ((tope.equals("*") || tope.equals("/"))
+                && (actual.equals("+") || actual.equals("-"))) {
+            result = true;
+        }
+        return result;
+    }
+
+    public static void main(String[] args) {
+        CalculadoraCarnita calcu = new CalculadoraCarnita();
+        String operador = calcu.infijoAPostfijo("9 / 3 + -3");
+
+        System.out.print("\n" + calcu.evaluaPostFijo(operador) + "\n" + "\n");
     }
 }
