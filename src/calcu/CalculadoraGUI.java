@@ -61,6 +61,8 @@ public class CalculadoraGUI extends javax.swing.JFrame {
         BotonIgual = new javax.swing.JButton();
         BotonPunto = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Antenna");
@@ -191,6 +193,10 @@ public class CalculadoraGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("jButton2");
+
+        jButton3.setText("jButton3");
+
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,6 +242,12 @@ public class CalculadoraGUI extends javax.swing.JFrame {
                             .add(BotonIgual, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .add(0, 0, Short.MAX_VALUE))))
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jTextField7)
+            .add(org.jdesktop.layout.GroupLayout.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .add(jButton3)
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(jButton2)
+                .add(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -267,7 +279,10 @@ public class CalculadoraGUI extends javax.swing.JFrame {
                         .add(Boton0)
                         .add(BotonPunto))
                     .add(BotonIgual, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .add(layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
+                    .add(jButton2)
+                    .add(jButton3)))
         );
 
         pack();
@@ -422,6 +437,8 @@ public class CalculadoraGUI extends javax.swing.JFrame {
     private javax.swing.JButton BotonPunto;
     private javax.swing.JButton BotonResta;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JTextField jTextField7;
     // End of variables declaration//GEN-END:variables
 }
