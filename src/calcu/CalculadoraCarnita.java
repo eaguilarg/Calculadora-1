@@ -22,7 +22,7 @@ public class CalculadoraCarnita {
     public CalculadoraCarnita() {
         this.calculadorita = new miPila();
     }
-
+                                                   cambiar el Unchecked por una Checked.
     public double evaluaPostFijo(String operacion) throws Unchecked {
         miPila calculadorita = new miPila();
         double resultado = 0, numero1 = 0, numero2 = 0;
